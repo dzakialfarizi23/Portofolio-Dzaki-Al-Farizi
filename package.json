@@ -1,0 +1,14 @@
+{
+  "name": "portofolio-dzaki-al-farizi",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Website portofolio dengan Tailwind CSS (Latihan 2)",
+  "scripts": {
+    "build": "tailwindcss -i ./src/input.css -o ./assets/css/style.css --minify",
+    "dev": "tailwindcss -i ./src/input.css -o ./assets/css/style.css --watch"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.0.0",
+    "tailwindcss": "^4.0.0"
+  }
+}

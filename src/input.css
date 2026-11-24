@@ -1,0 +1,92 @@
+@import "tailwindcss";
+
+/* Tailwind hanya memindai file ini untuk menemukan class yang dipakai */
+@source "../index.html";
+@source "../assets/js/main.js";
+
+/* Token desain portofolio (sama dengan variabel CSS di versi lama) */
+@theme {
+    --font-display: "Syne", ui-sans-serif, system-ui, sans-serif;
+    --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+
+    --color-canvas: #0a0a0f;
+    --color-surface: #111118;
+    --color-surface-2: #1a1a24;
+    --color-accent: #6ee7f7;
+    --color-accent-2: #a78bfa;
+    --color-ink: #e8e8f0;
+    --color-muted: #8a8aa3;
+    --color-line: rgb(110 231 247 / 0.12);
+
+    /* Breakpoint mengikuti versi lama: 580px dan 900px */
+    --breakpoint-sm: 580px;
+    --breakpoint-desk: 900px;
+
+    --animate-fade-up: fade-up 0.6s ease both;
+    @keyframes fade-up {
+        from {
+            opacity: 0;
+            transform: translateY(24px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+}
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 5rem;
+    }
+    body.has-cursor {
+        cursor: none;
+    }
+    :focus-visible {
+        outline: 2px solid var(--color-accent);
+        outline-offset: 3px;
+    }
+}
+
+/* Kisi latar belakang halaman */
+.bg-grid {
+    background-image:
+        linear-gradient(rgb(110 231 247 / 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgb(110 231 247 / 0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+}
+
+/* Animasi muncul saat di-scroll (aktif hanya jika JavaScript berjalan: class "js" di <html>) */
+@keyframes reveal-up {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+.js .reveal:not(.is-visible),
+.js .reveal-stagger > :not(.is-visible) {
+    opacity: 0;
+}
+.reveal.is-visible,
+.reveal-stagger > .is-visible {
+    animation: reveal-up 0.7s ease both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+    .js .reveal:not(.is-visible),
+    .js .reveal-stagger > :not(.is-visible) {
+        opacity: 1;
+    }
+    .reveal.is-visible,
+    .reveal-stagger > .is-visible {
+        animation: none;
+    }
+}

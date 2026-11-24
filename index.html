@@ -4,1219 +4,455 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dzaki Al Farizi — Portfolio</title>
+    <meta name="description" content="Portofolio Muhamad Dzaki Al Farizi, mahasiswa Informatika Universitas Teknokrat Indonesia: web developer dan creative technologist." />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a0a0f'/%3E%3Ctext x='32' y='44' font-size='36' font-weight='800' text-anchor='middle' font-family='sans-serif' fill='%236ee7f7'%3ED%3C/text%3E%3C/svg%3E" />
+    <script>document.documentElement.classList.add("js");</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
-    <style>
-      :root {
-        --bg: #0a0a0f;
-        --surface: #111118;
-        --surface2: #1a1a24;
-        --accent: #6ee7f7;
-        --accent2: #a78bfa;
-        --accent3: #f472b6;
-        --text: #e8e8f0;
-        --muted: #6b6b85;
-        --border: rgba(110, 231, 247, 0.12);
-        --glow: rgba(110, 231, 247, 0.15);
-      }
-
-      *,
-      *::before,
-      *::after {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
-
-      html {
-        scroll-behavior: smooth;
-      }
-
-      body {
-        font-family: "DM Sans", sans-serif;
-        background: var(--bg);
-        color: var(--text);
-        overflow-x: hidden;
-        cursor: none;
-      }
-
-      /* Custom cursor */
-      .cursor {
-        width: 8px;
-        height: 8px;
-        background: var(--accent);
-        border-radius: 50%;
-        position: fixed;
-        top: 0;
-        left: 0;
-        pointer-events: none;
-        z-index: 9999;
-        transition: transform 0.1s ease;
-        mix-blend-mode: difference;
-      }
-      .cursor-ring {
-        width: 32px;
-        height: 32px;
-        border: 1.5px solid var(--accent);
-        border-radius: 50%;
-        position: fixed;
-        top: 0;
-        left: 0;
-        pointer-events: none;
-        z-index: 9998;
-        transition: all 0.18s ease;
-        opacity: 0.6;
-      }
-
-      /* Background grid */
-      body::before {
-        content: "";
-        position: fixed;
-        inset: 0;
-        background-image: linear-gradient(rgba(110, 231, 247, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(110, 231, 247, 0.03) 1px, transparent 1px);
-        background-size: 60px 60px;
-        pointer-events: none;
-        z-index: 0;
-      }
-
-      /* NAV */
-      nav {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        z-index: 100;
-        padding: 1.25rem 3rem;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        border-bottom: 1px solid var(--border);
-        background: rgba(10, 10, 15, 0.8);
-        backdrop-filter: blur(20px);
-      }
-      .nav-logo {
-        font-family: "Syne", sans-serif;
-        font-size: 1.1rem;
-        font-weight: 800;
-        letter-spacing: -0.02em;
-        color: var(--text);
-        text-decoration: none;
-      }
-      .nav-logo span {
-        color: var(--accent);
-      }
-      .nav-links {
-        display: flex;
-        gap: 2.5rem;
-        list-style: none;
-      }
-      .nav-links a {
-        font-size: 0.82rem;
-        font-weight: 500;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        color: var(--muted);
-        text-decoration: none;
-        transition: color 0.2s;
-      }
-      .nav-links a:hover {
-        color: var(--accent);
-      }
-
-      /* HERO */
-      .hero {
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        padding: 6rem 3rem 4rem;
-        position: relative;
-        overflow: hidden;
-      }
-      .hero-orb {
-        position: absolute;
-        border-radius: 50%;
-        filter: blur(80px);
-        pointer-events: none;
-      }
-      .orb1 {
-        width: 600px;
-        height: 600px;
-        background: radial-gradient(circle, rgba(110, 231, 247, 0.12), transparent 70%);
-        top: -100px;
-        right: -100px;
-      }
-      .orb2 {
-        width: 400px;
-        height: 400px;
-        background: radial-gradient(circle, rgba(167, 139, 250, 0.1), transparent 70%);
-        bottom: 0;
-        left: 100px;
-      }
-      .hero-inner {
-        position: relative;
-        z-index: 1;
-        max-width: 1200px;
-        width: 100%;
-        margin: 0 auto;
-      }
-      .hero-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        border: 1px solid var(--border);
-        background: var(--surface);
-        padding: 0.35rem 0.9rem;
-        border-radius: 999px;
-        font-size: 0.75rem;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        color: var(--accent);
-        margin-bottom: 2rem;
-        animation: fadeUp 0.6s ease both;
-      }
-      .hero-badge::before {
-        content: "";
-        width: 6px;
-        height: 6px;
-        background: var(--accent);
-        border-radius: 50%;
-        animation: pulse 2s infinite;
-      }
-      @keyframes pulse {
-        0%,
-        100% {
-          opacity: 1;
-        }
-        50% {
-          opacity: 0.3;
-        }
-      }
-      .hero-name {
-        font-family: "Syne", sans-serif;
-        font-size: clamp(3.5rem, 9vw, 8rem);
-        font-weight: 800;
-        line-height: 0.92;
-        letter-spacing: -0.04em;
-        margin-bottom: 1.5rem;
-        animation: fadeUp 0.6s 0.1s ease both;
-      }
-      .hero-name .line2 {
-        display: block;
-        color: transparent;
-        -webkit-text-stroke: 1.5px rgba(110, 231, 247, 0.5);
-      }
-      .hero-name .highlight {
-        color: var(--accent);
-      }
-      .hero-desc {
-        font-size: 1.1rem;
-        line-height: 1.7;
-        color: var(--muted);
-        max-width: 520px;
-        margin-bottom: 2.5rem;
-        animation: fadeUp 0.6s 0.2s ease both;
-      }
-      .hero-actions {
-        display: flex;
-        gap: 1rem;
-        flex-wrap: wrap;
-        animation: fadeUp 0.6s 0.3s ease both;
-      }
-      .btn {
-        padding: 0.8rem 2rem;
-        border-radius: 6px;
-        font-family: "DM Sans", sans-serif;
-        font-size: 0.9rem;
-        font-weight: 500;
-        text-decoration: none;
-        transition: all 0.2s;
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-      }
-      .btn-primary {
-        background: var(--accent);
-        color: #0a0a0f;
-      }
-      .btn-primary:hover {
-        background: #a5f3fc;
-        transform: translateY(-2px);
-      }
-      .btn-outline {
-        border: 1px solid var(--border);
-        color: var(--text);
-        background: transparent;
-      }
-      .btn-outline:hover {
-        border-color: var(--accent);
-        color: var(--accent);
-        transform: translateY(-2px);
-      }
-
-      .hero-meta {
-        margin-top: 5rem;
-        display: flex;
-        gap: 3rem;
-        animation: fadeUp 0.6s 0.4s ease both;
-      }
-      .meta-item {
-        display: flex;
-        flex-direction: column;
-        gap: 0.25rem;
-      }
-      .meta-num {
-        font-family: "Syne", sans-serif;
-        font-size: 2rem;
-        font-weight: 700;
-        color: var(--accent);
-      }
-      .meta-label {
-        font-size: 0.78rem;
-        letter-spacing: 0.05em;
-        text-transform: uppercase;
-        color: var(--muted);
-      }
-
-      @keyframes fadeUp {
-        from {
-          opacity: 0;
-          transform: translateY(24px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      /* SECTIONS */
-      section {
-        position: relative;
-        z-index: 1;
-      }
-      .section-inner {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 6rem 3rem;
-      }
-      .section-label {
-        font-size: 0.72rem;
-        letter-spacing: 0.15em;
-        text-transform: uppercase;
-        color: var(--accent);
-        margin-bottom: 0.75rem;
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-      }
-      .section-label::before {
-        content: "";
-        width: 24px;
-        height: 1px;
-        background: var(--accent);
-      }
-      .section-title {
-        font-family: "Syne", sans-serif;
-        font-size: clamp(2rem, 4vw, 3.2rem);
-        font-weight: 700;
-        letter-spacing: -0.03em;
-        line-height: 1.1;
-        margin-bottom: 4rem;
-      }
-
-      /* ABOUT */
-      .about-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 4rem;
-        align-items: start;
-      }
-      .about-text p {
-        font-size: 1.05rem;
-        line-height: 1.8;
-        color: rgba(232, 232, 240, 0.75);
-        margin-bottom: 1.25rem;
-      }
-      .about-details {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-      }
-      .detail-card {
-        background: var(--surface);
-        border: 1px solid var(--border);
-        border-radius: 12px;
-        padding: 1.25rem 1.5rem;
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        transition:
-          border-color 0.2s,
-          transform 0.2s;
-      }
-      .detail-card:hover {
-        border-color: var(--accent);
-        transform: translateX(4px);
-      }
-      .detail-icon {
-        font-size: 1.2rem;
-        min-width: 36px;
-        text-align: center;
-      }
-      .detail-info label {
-        font-size: 0.72rem;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        color: var(--muted);
-        display: block;
-        margin-bottom: 0.15rem;
-      }
-      .detail-info span {
-        font-size: 0.9rem;
-        font-weight: 500;
-      }
-
-      /* SKILLS */
-      .skills-bg {
-        background: var(--surface);
-        border-top: 1px solid var(--border);
-        border-bottom: 1px solid var(--border);
-      }
-      .skills-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1.5rem;
-      }
-      .skill-card {
-        background: var(--bg);
-        border: 1px solid var(--border);
-        border-radius: 16px;
-        padding: 1.75rem;
-        transition: all 0.25s;
-        position: relative;
-        overflow: hidden;
-      }
-      .skill-card::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 2px;
-        background: linear-gradient(90deg, var(--accent), var(--accent2));
-        opacity: 0;
-        transition: opacity 0.25s;
-      }
-      .skill-card:hover {
-        border-color: rgba(110, 231, 247, 0.3);
-        transform: translateY(-4px);
-      }
-      .skill-card:hover::before {
-        opacity: 1;
-      }
-      .skill-cat {
-        font-size: 0.7rem;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        color: var(--accent);
-        margin-bottom: 0.6rem;
-      }
-      .skill-name {
-        font-family: "Syne", sans-serif;
-        font-size: 1.05rem;
-        font-weight: 600;
-        margin-bottom: 0.6rem;
-      }
-      .skill-desc {
-        font-size: 0.82rem;
-        line-height: 1.6;
-        color: var(--muted);
-      }
-
-      /* EXPERIENCE */
-      .exp-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 2rem;
-      }
-      .exp-col-title {
-        font-family: "Syne", sans-serif;
-        font-size: 0.85rem;
-        font-weight: 700;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        color: var(--muted);
-        margin-bottom: 1.5rem;
-        padding-bottom: 0.75rem;
-        border-bottom: 1px solid var(--border);
-      }
-      .exp-item {
-        padding: 1.25rem 0;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-        display: flex;
-        flex-direction: column;
-        gap: 0.25rem;
-      }
-      .exp-role {
-        font-weight: 500;
-        font-size: 0.95rem;
-      }
-      .exp-place {
-        font-size: 0.82rem;
-        color: var(--accent);
-      }
-      .exp-duration {
-        font-size: 0.75rem;
-        color: var(--muted);
-      }
-      .exp-desc {
-        font-size: 0.82rem;
-        color: rgba(232, 232, 240, 0.6);
-        line-height: 1.5;
-        margin-top: 0.25rem;
-      }
-
-      /* PROJECTS */
-      .projects-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1.5rem;
-      }
-      .project-card {
-        background: var(--surface);
-        border: 1px solid var(--border);
-        border-radius: 16px;
-        overflow: hidden;
-        transition: all 0.3s;
-        group: true;
-      }
-      .project-card:hover {
-        border-color: rgba(110, 231, 247, 0.4);
-        transform: translateY(-6px);
-        box-shadow:
-          0 20px 40px rgba(0, 0, 0, 0.4),
-          0 0 0 1px rgba(110, 231, 247, 0.1);
-      }
-      .project-preview {
-        position: relative;
-        height: 160px;
-        background: var(--surface2);
-        overflow: hidden;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      .project-preview iframe {
-        width: 200%;
-        height: 200%;
-        transform: scale(0.5);
-        transform-origin: top left;
-        border: none;
-        pointer-events: none;
-      }
-      .project-overlay {
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(to bottom, transparent 40%, var(--surface) 100%);
-      }
-      .project-preview-fallback {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        height: 100%;
-        font-size: 2.5rem;
-      }
-      .project-body {
-        padding: 1.25rem 1.5rem 1.5rem;
-      }
-      .project-num {
-        font-family: "Syne", sans-serif;
-        font-size: 0.65rem;
-        letter-spacing: 0.15em;
-        color: var(--muted);
-        margin-bottom: 0.4rem;
-      }
-      .project-title {
-        font-family: "Syne", sans-serif;
-        font-size: 1rem;
-        font-weight: 700;
-        margin-bottom: 0.4rem;
-      }
-      .project-desc {
-        font-size: 0.8rem;
-        color: var(--muted);
-        line-height: 1.5;
-        margin-bottom: 1rem;
-      }
-      .project-link {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.4rem;
-        font-size: 0.78rem;
-        font-weight: 500;
-        color: var(--accent);
-        text-decoration: none;
-        letter-spacing: 0.04em;
-        transition: gap 0.2s;
-      }
-      .project-link:hover {
-        gap: 0.7rem;
-      }
-      .project-link svg {
-        width: 12px;
-        height: 12px;
-        transition: transform 0.2s;
-      }
-      .project-link:hover svg {
-        transform: translate(2px, -2px);
-      }
-
-      /* CONTACT */
-      .contact-bg {
-        background: var(--surface);
-        border-top: 1px solid var(--border);
-      }
-      .contact-inner {
-        display: grid;
-        grid-template-columns: 1.2fr 1fr;
-        gap: 5rem;
-        align-items: center;
-      }
-      .contact-tagline {
-        font-family: "Syne", sans-serif;
-        font-size: clamp(2rem, 4vw, 3rem);
-        font-weight: 700;
-        line-height: 1.15;
-        letter-spacing: -0.03em;
-        margin-bottom: 1.5rem;
-      }
-      .contact-tagline span {
-        color: var(--accent);
-      }
-      .contact-sub {
-        font-size: 1rem;
-        line-height: 1.7;
-        color: var(--muted);
-        margin-bottom: 2rem;
-      }
-      .contact-links {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-      }
-      .contact-link {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        padding: 1rem 1.25rem;
-        background: var(--bg);
-        border: 1px solid var(--border);
-        border-radius: 12px;
-        text-decoration: none;
-        color: var(--text);
-        transition: all 0.2s;
-      }
-      .contact-link:hover {
-        border-color: var(--accent);
-        transform: translateX(4px);
-      }
-      .contact-link-icon {
-        width: 36px;
-        height: 36px;
-        background: var(--surface2);
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1rem;
-        flex-shrink: 0;
-      }
-      .contact-link-info label {
-        display: block;
-        font-size: 0.68rem;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        color: var(--muted);
-        margin-bottom: 0.1rem;
-      }
-      .contact-link-info span {
-        font-size: 0.88rem;
-        font-weight: 500;
-      }
-
-      /* FOOTER */
-      footer {
-        padding: 1.5rem 3rem;
-        text-align: center;
-        font-size: 0.78rem;
-        color: var(--muted);
-        border-top: 1px solid var(--border);
-        letter-spacing: 0.03em;
-      }
-
-      /* DIVIDER */
-      .section-divider {
-        border: none;
-        height: 1px;
-        background: var(--border);
-        margin: 0;
-      }
-
-      /* SCROLL REVEAL */
-      .reveal {
-        opacity: 0;
-        transform: translateY(30px);
-        transition:
-          opacity 0.7s ease,
-          transform 0.7s ease;
-      }
-      .reveal.visible {
-        opacity: 1;
-        transform: none;
-      }
-
-      @media (max-width: 900px) {
-        nav {
-          padding: 1rem 1.5rem;
-        }
-        .nav-links {
-          display: none;
-        }
-        .section-inner {
-          padding: 4rem 1.5rem;
-        }
-        .hero {
-          padding: 5rem 1.5rem 3rem;
-        }
-        .about-grid,
-        .exp-grid,
-        .contact-inner {
-          grid-template-columns: 1fr;
-          gap: 2rem;
-        }
-        .skills-grid,
-        .projects-grid {
-          grid-template-columns: 1fr 1fr;
-        }
-        .hero-meta {
-          gap: 2rem;
-        }
-        body {
-          cursor: auto;
-        }
-        .cursor,
-        .cursor-ring {
-          display: none;
-        }
-      }
-      @media (max-width: 580px) {
-        .skills-grid,
-        .projects-grid {
-          grid-template-columns: 1fr;
-        }
-      }
-    </style>
+    <!-- CSS hasil kompilasi Tailwind (sumber: src/input.css) -->
+    <link rel="stylesheet" href="assets/css/style.css" />
   </head>
-  <body>
-    <div class="cursor" id="cursor"></div>
-    <div class="cursor-ring" id="cursorRing"></div>
+  <body class="overflow-x-hidden bg-canvas font-sans text-ink antialiased">
+    <a href="#about" class="sr-only rounded-md bg-accent px-4 py-2 font-medium text-canvas focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[10000]">Lewati ke konten utama</a>
+
+    <!-- Kursor kustom (aktif hanya di desktop dengan mouse) -->
+    <div id="cursor" class="pointer-events-none fixed left-0 top-0 z-[9999] hidden size-2 rounded-full bg-accent mix-blend-difference transition-transform duration-100"></div>
+    <div id="cursorRing" class="pointer-events-none fixed left-0 top-0 z-[9998] hidden size-8 rounded-full border-[1.5px] border-accent opacity-60 transition-transform duration-200"></div>
+
+    <!-- Kisi latar belakang -->
+    <div class="bg-grid pointer-events-none fixed inset-0 z-0" aria-hidden="true"></div>
 
     <!-- NAV -->
-    <nav>
-      <a href="#" class="nav-logo">Dzaki<span>.</span></a>
-      <ul class="nav-links">
-        <li><a href="#about">Tentang</a></li>
-        <li><a href="#skills">Keahlian</a></li>
-        <li><a href="#experience">Pengalaman</a></li>
-        <li><a href="#projects">Proyek</a></li>
-        <li><a href="#contact">Kontak</a></li>
+    <header class="fixed inset-x-0 top-0 z-50 border-b border-line bg-canvas/80 backdrop-blur-xl">
+      <nav class="flex items-center justify-between px-6 py-4 desk:px-12 desk:py-5" aria-label="Navigasi utama">
+        <a href="#" class="font-display text-[1.1rem] font-extrabold tracking-[-0.02em] text-ink">Dzaki<span class="text-accent">.</span></a>
+        <ul class="hidden gap-10 desk:flex">
+          <li><a href="#about" class="text-[0.82rem] font-medium uppercase tracking-[0.08em] text-muted transition-colors hover:text-accent">Tentang</a></li>
+          <li><a href="#skills" class="text-[0.82rem] font-medium uppercase tracking-[0.08em] text-muted transition-colors hover:text-accent">Keahlian</a></li>
+          <li><a href="#experience" class="text-[0.82rem] font-medium uppercase tracking-[0.08em] text-muted transition-colors hover:text-accent">Pengalaman</a></li>
+          <li><a href="#projects" class="text-[0.82rem] font-medium uppercase tracking-[0.08em] text-muted transition-colors hover:text-accent">Proyek</a></li>
+          <li><a href="#contact" class="text-[0.82rem] font-medium uppercase tracking-[0.08em] text-muted transition-colors hover:text-accent">Kontak</a></li>
+        </ul>
+        <button id="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Buka menu navigasi" class="grid size-10 place-items-center rounded-lg border border-line text-ink desk:hidden">
+          <svg data-open class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+          <svg data-close class="hidden size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
+        </button>
+      </nav>
+      <ul id="mobile-menu" class="hidden border-t border-line bg-canvas px-6 py-3 desk:hidden">
+        <li><a href="#about" class="block rounded-lg px-3 py-3 text-[0.85rem] font-medium uppercase tracking-[0.08em] text-muted hover:bg-white/5 hover:text-accent">Tentang</a></li>
+        <li><a href="#skills" class="block rounded-lg px-3 py-3 text-[0.85rem] font-medium uppercase tracking-[0.08em] text-muted hover:bg-white/5 hover:text-accent">Keahlian</a></li>
+        <li><a href="#experience" class="block rounded-lg px-3 py-3 text-[0.85rem] font-medium uppercase tracking-[0.08em] text-muted hover:bg-white/5 hover:text-accent">Pengalaman</a></li>
+        <li><a href="#projects" class="block rounded-lg px-3 py-3 text-[0.85rem] font-medium uppercase tracking-[0.08em] text-muted hover:bg-white/5 hover:text-accent">Proyek</a></li>
+        <li><a href="#contact" class="block rounded-lg px-3 py-3 text-[0.85rem] font-medium uppercase tracking-[0.08em] text-muted hover:bg-white/5 hover:text-accent">Kontak</a></li>
       </ul>
-    </nav>
+    </header>
 
-    <!-- HERO -->
-    <section class="hero">
-      <div class="hero-orb orb1"></div>
-      <div class="hero-orb orb2"></div>
-      <div class="hero-inner">
-        <div class="hero-badge">Mahasiswa Informatika — Aktif 2024</div>
-        <h1 class="hero-name">
-          Muhamad<br />
-          Dzaki<span class="highlight"> Al</span><br />
-          <span class="line2">Farizi</span>
-        </h1>
-        <p class="hero-desc">Web Developer & Creative Technologist. Merancang pengalaman digital yang fungsional, estetik, dan berkesan — dari konsep hingga kode.</p>
-        <div class="hero-actions">
-          <a href="#projects" class="btn btn-primary">Lihat Proyek →</a>
-          <a href="#contact" class="btn btn-outline">Hubungi Saya</a>
+    <main>
+      <!-- HERO -->
+      <section class="relative z-10 flex min-h-screen items-center overflow-hidden px-6 pb-12 pt-24 desk:px-12 desk:pb-16">
+        <div class="pointer-events-none absolute -right-25 -top-25 size-[600px] rounded-full bg-[radial-gradient(circle,rgb(110_231_247/0.12),transparent_70%)] blur-[80px]" aria-hidden="true"></div>
+        <div class="pointer-events-none absolute bottom-0 left-25 size-[400px] rounded-full bg-[radial-gradient(circle,rgb(167_139_250/0.1),transparent_70%)] blur-[80px]" aria-hidden="true"></div>
+
+        <div class="relative z-10 mx-auto w-full max-w-[1200px]">
+          <p class="mb-8 inline-flex animate-fade-up items-center gap-2 rounded-full border border-line bg-surface px-[0.9rem] py-[0.35rem] text-xs uppercase tracking-widest text-accent before:size-1.5 before:animate-pulse before:rounded-full before:bg-accent before:content-['']">
+            Mahasiswa Informatika — Aktif 2024
+          </p>
+          <h1 class="mb-6 animate-fade-up font-display text-[clamp(3.5rem,9vw,8rem)] font-extrabold leading-[0.92] tracking-[-0.04em] [animation-delay:0.1s]">
+            Muhamad<br />
+            Dzaki<span class="text-accent"> Al</span><br />
+            <span class="block text-transparent [-webkit-text-stroke:1.5px_rgb(110_231_247/0.5)]">Farizi</span>
+          </h1>
+          <p class="mb-10 max-w-[520px] animate-fade-up text-[1.1rem] leading-[1.7] text-muted [animation-delay:0.2s]">
+            Web Developer &amp; Creative Technologist. Merancang pengalaman digital yang fungsional, estetik, dan berkesan — dari konsep hingga kode.
+          </p>
+          <div class="flex animate-fade-up flex-wrap gap-4 [animation-delay:0.3s]">
+            <a href="#projects" class="inline-flex items-center gap-2 rounded-md px-8 py-[0.8rem] text-[0.9rem] font-medium transition duration-200 hover:-translate-y-0.5 bg-accent text-canvas hover:bg-[#a5f3fc]">Lihat Proyek →</a>
+            <a href="#contact" class="inline-flex items-center gap-2 rounded-md px-8 py-[0.8rem] text-[0.9rem] font-medium transition duration-200 hover:-translate-y-0.5 border border-line text-ink hover:border-accent hover:text-accent">Hubungi Saya</a>
+          </div>
+          <dl class="mt-20 flex animate-fade-up gap-8 [animation-delay:0.4s] desk:gap-12">
+            <div class="flex flex-col-reverse gap-1">
+              <dt class="text-[0.78rem] uppercase tracking-[0.05em] text-muted">Proyek Web</dt>
+              <dd class="font-display text-[2rem] font-bold text-accent">10+</dd>
+            </div>
+            <div class="flex flex-col-reverse gap-1">
+              <dt class="text-[0.78rem] uppercase tracking-[0.05em] text-muted">Org. Aktif</dt>
+              <dd class="font-display text-[2rem] font-bold text-accent">3+</dd>
+            </div>
+            <div class="flex flex-col-reverse gap-1">
+              <dt class="text-[0.78rem] uppercase tracking-[0.05em] text-muted">Pengalaman Kerja</dt>
+              <dd class="font-display text-[2rem] font-bold text-accent">6+</dd>
+            </div>
+          </dl>
         </div>
-        <div class="hero-meta">
-          <div class="meta-item">
-            <span class="meta-num">10+</span>
-            <span class="meta-label">Proyek Web</span>
-          </div>
-          <div class="meta-item">
-            <span class="meta-num">3+</span>
-            <span class="meta-label">Org. Aktif</span>
-          </div>
-          <div class="meta-item">
-            <span class="meta-num">6+</span>
-            <span class="meta-label">Pengalaman Kerja</span>
-          </div>
-        </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- ABOUT -->
-    <section id="about">
-      <div class="section-inner">
-        <div class="section-label">Profil</div>
-        <h2 class="section-title">Tentang Saya</h2>
-        <div class="about-grid reveal">
-          <div class="about-text">
-            <p>
-              Saya adalah mahasiswa aktif Universitas Teknokrat Indonesia jurusan Informatika, dengan semangat besar untuk berkembang di dunia teknologi dan digital. Saya percaya bahwa kreativitas dan kode bisa berjalan berdampingan untuk
-              menghasilkan solusi yang bermakna.
-            </p>
-            <p>Meski masih di awal perjalanan karir, saya membawa energi, kemauan keras, dan sudut pandang segar ke setiap proyek. Saya terbiasa belajar cepat, berkolaborasi dalam tim, dan menghadapi tantangan baru dengan kepala dingin.</p>
-            <p>Di luar coding, saya aktif dalam organisasi kemahasiswaan dan komunitas kepemudaan — karena saya percaya pertumbuhan terbaik terjadi ketika kita terhubung dengan orang lain.</p>
-          </div>
-          <div class="about-details">
-            <div class="detail-card">
-              <div class="detail-icon">🎓</div>
-              <div class="detail-info">
-                <label>Pendidikan</label>
-                <span>Universitas Teknokrat Indonesia</span>
-              </div>
+      <!-- ABOUT -->
+      <section id="about" class="relative z-10">
+        <div class="mx-auto max-w-[1200px] px-6 py-16 desk:px-12 desk:py-24">
+          <p class="mb-3 flex items-center gap-3 text-[0.72rem] uppercase tracking-[0.15em] text-accent before:h-px before:w-6 before:bg-accent before:content-['']">Profil</p>
+          <h2 class="mb-12 font-display text-[clamp(2rem,4vw,3.2rem)] font-bold leading-[1.1] tracking-[-0.03em] desk:mb-16">Tentang Saya</h2>
+          <div class="reveal grid items-start gap-8 desk:grid-cols-2 desk:gap-16">
+            <div class="space-y-5 text-[1.05rem] leading-[1.8] text-ink/75">
+              <p>Saya adalah mahasiswa aktif Universitas Teknokrat Indonesia jurusan Informatika, dengan semangat besar untuk berkembang di dunia teknologi dan digital. Saya percaya bahwa kreativitas dan kode bisa berjalan berdampingan untuk menghasilkan solusi yang bermakna.</p>
+              <p>Meski masih di awal perjalanan karir, saya membawa energi, kemauan keras, dan sudut pandang segar ke setiap proyek. Saya terbiasa belajar cepat, berkolaborasi dalam tim, dan menghadapi tantangan baru dengan kepala dingin.</p>
+              <p>Di luar coding, saya aktif dalam organisasi kemahasiswaan dan komunitas kepemudaan — karena saya percaya pertumbuhan terbaik terjadi ketika kita terhubung dengan orang lain.</p>
             </div>
-            <div class="detail-card">
-              <div class="detail-icon">📍</div>
-              <div class="detail-info">
-                <label>Lokasi</label>
-                <span>Natar, Lampung Selatan, Indonesia</span>
-              </div>
-            </div>
-            <div class="detail-card">
-              <div class="detail-icon">📧</div>
-              <div class="detail-info">
-                <label>Email</label>
-                <span>dzakialfarizii3@gmail.com</span>
-              </div>
-            </div>
-            <div class="detail-card">
-              <div class="detail-icon">📞</div>
-              <div class="detail-info">
-                <label>Telepon</label>
-                <span>+62 897-011-0236</span>
-              </div>
-            </div>
-            <div class="detail-card">
-              <div class="detail-icon">🌐</div>
-              <div class="detail-info">
-                <label>Bahasa</label>
-                <span>Indonesia (Native) · Inggris (Dasar)</span>
-              </div>
+            <div class="flex flex-col gap-4">
+          <div class="flex items-center gap-4 rounded-xl border border-line bg-surface px-6 py-5 transition duration-200 hover:translate-x-1 hover:border-accent">
+            <span class="min-w-9 text-center text-xl" aria-hidden="true">🎓</span>
+            <div>
+              <span class="mb-[0.15rem] block text-[0.72rem] uppercase tracking-[0.08em] text-muted">Pendidikan</span>
+              <span class="text-[0.9rem] font-medium">Universitas Teknokrat Indonesia</span>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <hr class="section-divider" />
-
-    <!-- SKILLS -->
-    <section id="skills" class="skills-bg">
-      <div class="section-inner">
-        <div class="section-label">Kompetensi</div>
-        <h2 class="section-title">Keahlian</h2>
-        <div class="skills-grid reveal">
-          <div class="skill-card">
-            <div class="skill-cat">Technical</div>
-            <div class="skill-name">Komputer & Coding</div>
-            <div class="skill-desc">Microsoft Office, kemampuan coding dasar, pengembangan web frontend, pemahaman penggunaan internet dan email profesional.</div>
-          </div>
-          <div class="skill-card">
-            <div class="skill-cat">Technical</div>
-            <div class="skill-name">Analitis & Problem Solving</div>
-            <div class="skill-desc">Menganalisis informasi, memecahkan masalah, dan membuat keputusan berbasis data. Mengidentifikasi dan mengimplementasikan solusi dengan efektif.</div>
-          </div>
-          <div class="skill-card">
-            <div class="skill-cat">Technical</div>
-            <div class="skill-name">Matematika & Sains</div>
-            <div class="skill-desc">Aritmatika, algebra, geometri, statistik, serta dasar-dasar ilmu pengetahuan alam dan sosial.</div>
-          </div>
-          <div class="skill-card">
-            <div class="skill-cat">Soft Skill</div>
-            <div class="skill-name">Kepemimpinan</div>
-            <div class="skill-desc">Menyampaikan ide dengan jelas, berani mengambil keputusan, dan bertanggung jawab atas konsekuensinya dalam tim maupun organisasi.</div>
-          </div>
-          <div class="skill-card">
-            <div class="skill-cat">Soft Skill</div>
-            <div class="skill-name">Komunikasi & Kolaborasi</div>
-            <div class="skill-desc">Mampu bekerja sama lintas tim, membangun hubungan yang baik, dan menyampaikan penjelasan kepada berbagai audiens secara efektif.</div>
-          </div>
-          <div class="skill-card">
-            <div class="skill-cat">Soft Skill</div>
-            <div class="skill-name">Kreativitas & Adaptasi</div>
-            <div class="skill-desc">Mengembangkan pendekatan kreatif dalam setiap situasi. Mampu beradaptasi dengan cepat terhadap perubahan dan lingkungan baru.</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <hr class="section-divider" />
-
-    <!-- EXPERIENCE -->
-    <section id="experience">
-      <div class="section-inner">
-        <div class="section-label">Riwayat</div>
-        <h2 class="section-title">Pengalaman</h2>
-        <div class="exp-grid reveal">
-          <div>
-            <div class="exp-col-title">💼 Pengalaman Kerja</div>
-            <div class="exp-item">
-              <span class="exp-role">Videografer, Editor & Pembuat Konten</span>
-              <span class="exp-place">Radio Andalas</span>
-              <span class="exp-duration">Magang</span>
-              <span class="exp-desc">Bertugas sebagai videografer, melakukan editing video, serta mencari tema dan ide konten liputan yang menarik dan relevan.</span>
-            </div>
-            <div class="exp-item">
-              <span class="exp-role">Videografer</span>
-              <span class="exp-place">Tegar TV</span>
-              <span class="exp-duration">Magang</span>
-            </div>
-            <div class="exp-item">
-              <span class="exp-role">Asisten Fotografer</span>
-              <span class="exp-place">Wahyu FO</span>
-              <span class="exp-duration">Freelance</span>
-            </div>
-            <div class="exp-item">
-              <span class="exp-role">Sales Marketing</span>
-              <span class="exp-place">YAMAHA</span>
-              <span class="exp-duration">1 Bulan</span>
-            </div>
-            <div class="exp-item">
-              <span class="exp-role">Konsultan Bisnis</span>
-              <span class="exp-place">PT. Best Profit</span>
-              <span class="exp-duration">1 Bulan</span>
-            </div>
-            <div class="exp-item">
-              <span class="exp-role">Telemarketing</span>
-              <span class="exp-place">PT. Net Apps</span>
-              <span class="exp-duration">1 Bulan (Freelance)</span>
+          <div class="flex items-center gap-4 rounded-xl border border-line bg-surface px-6 py-5 transition duration-200 hover:translate-x-1 hover:border-accent">
+            <span class="min-w-9 text-center text-xl" aria-hidden="true">📍</span>
+            <div>
+              <span class="mb-[0.15rem] block text-[0.72rem] uppercase tracking-[0.08em] text-muted">Lokasi</span>
+              <span class="text-[0.9rem] font-medium">Natar, Lampung Selatan, Indonesia</span>
             </div>
           </div>
-          <div>
-            <div class="exp-col-title">🏛️ Pengalaman Organisasi</div>
-            <div class="exp-item">
-              <span class="exp-role">Anggota — Divisi Humas (Eksternal & Sponsorship)</span>
-              <span class="exp-place">Himpunan Mahasiswa Informatika</span>
-              <span class="exp-duration">2024 — Sekarang</span>
-              <span class="exp-desc">Menjalin hubungan eksternal, mengelola sponsorship kegiatan, dan menjadi representasi himpunan di acara eksternal.</span>
+          <div class="flex items-center gap-4 rounded-xl border border-line bg-surface px-6 py-5 transition duration-200 hover:translate-x-1 hover:border-accent">
+            <span class="min-w-9 text-center text-xl" aria-hidden="true">📧</span>
+            <div>
+              <span class="mb-[0.15rem] block text-[0.72rem] uppercase tracking-[0.08em] text-muted">Email</span>
+              <span class="text-[0.9rem] font-medium">dzakialfarizii3@gmail.com</span>
             </div>
-            <div class="exp-item">
-              <span class="exp-role">Anggota</span>
-              <span class="exp-place">Anak Muda Pesisir Selatan (AMPS)</span>
-              <span class="exp-duration">Desember 2024 — Sekarang</span>
-              <span class="exp-desc">Mendukung program organisasi, melaksanakan proyek, dan menghadiri rapat serta acara organisasi.</span>
+          </div>
+          <div class="flex items-center gap-4 rounded-xl border border-line bg-surface px-6 py-5 transition duration-200 hover:translate-x-1 hover:border-accent">
+            <span class="min-w-9 text-center text-xl" aria-hidden="true">📞</span>
+            <div>
+              <span class="mb-[0.15rem] block text-[0.72rem] uppercase tracking-[0.08em] text-muted">Telepon</span>
+              <span class="text-[0.9rem] font-medium">+62 897-011-0236</span>
             </div>
-            <div class="exp-item">
-              <span class="exp-role">Anggota</span>
-              <span class="exp-place">Ikatan Pemuda Pemudi Sulit Air (IPPSA)</span>
-              <span class="exp-duration">Agustus 2019 — Sekarang</span>
-              <span class="exp-desc">Aktif berpartisipasi dalam kegiatan, menyampaikan ide, dan berkolaborasi untuk mencapai tujuan bersama.</span>
+          </div>
+          <div class="flex items-center gap-4 rounded-xl border border-line bg-surface px-6 py-5 transition duration-200 hover:translate-x-1 hover:border-accent">
+            <span class="min-w-9 text-center text-xl" aria-hidden="true">🌐</span>
+            <div>
+              <span class="mb-[0.15rem] block text-[0.72rem] uppercase tracking-[0.08em] text-muted">Bahasa</span>
+              <span class="text-[0.9rem] font-medium">Indonesia (Native) · Inggris (Dasar)</span>
+            </div>
+          </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <hr class="section-divider" />
-
-    <!-- PROJECTS -->
-    <section id="projects">
-      <div class="section-inner">
-        <div class="section-label">Portofolio</div>
-        <h2 class="section-title">Proyek Web</h2>
-        <div class="projects-grid reveal" id="projectsGrid">
-          <div class="project-card">
-            <div class="project-preview">
-              <div class="project-preview-fallback">🏝️</div>
-              <div class="project-overlay"></div>
-            </div>
-            <div class="project-body">
-              <div class="project-num">01 / Wisata</div>
-              <h3 class="project-title">Wisata Explorer</h3>
-              <p class="project-desc">Website informasi destinasi wisata interaktif dengan tampilan yang menarik dan informatif.</p>
-              <a href="https://dzakialfarizi23.github.io/wisata/" target="_blank" class="project-link">
-                Lihat Proyek <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10" /></svg>
-              </a>
-            </div>
+      <!-- SKILLS -->
+      <section id="skills" class="relative z-10 border-y border-line bg-surface">
+        <div class="mx-auto max-w-[1200px] px-6 py-16 desk:px-12 desk:py-24">
+          <p class="mb-3 flex items-center gap-3 text-[0.72rem] uppercase tracking-[0.15em] text-accent before:h-px before:w-6 before:bg-accent before:content-['']">Kompetensi</p>
+          <h2 class="mb-12 font-display text-[clamp(2rem,4vw,3.2rem)] font-bold leading-[1.1] tracking-[-0.03em] desk:mb-16">Keahlian</h2>
+          <div class="reveal-stagger grid gap-6 sm:grid-cols-2 desk:grid-cols-3">
+          <article class="relative overflow-hidden rounded-2xl border border-line bg-canvas p-7 transition duration-300 before:absolute before:inset-x-0 before:top-0 before:h-0.5 before:bg-linear-to-r before:from-accent before:to-accent-2 before:opacity-0 before:transition-opacity before:duration-300 before:content-[''] hover:-translate-y-1 hover:border-accent/30 hover:before:opacity-100">
+            <p class="mb-[0.6rem] text-[0.7rem] uppercase tracking-[0.12em] text-accent">Technical</p>
+            <h3 class="mb-[0.6rem] font-display text-[1.05rem] font-semibold">Komputer &amp; Coding</h3>
+            <p class="text-[0.82rem] leading-relaxed text-muted">Microsoft Office, kemampuan coding dasar, pengembangan web frontend, pemahaman penggunaan internet dan email profesional.</p>
+          </article>
+          <article class="relative overflow-hidden rounded-2xl border border-line bg-canvas p-7 transition duration-300 before:absolute before:inset-x-0 before:top-0 before:h-0.5 before:bg-linear-to-r before:from-accent before:to-accent-2 before:opacity-0 before:transition-opacity before:duration-300 before:content-[''] hover:-translate-y-1 hover:border-accent/30 hover:before:opacity-100">
+            <p class="mb-[0.6rem] text-[0.7rem] uppercase tracking-[0.12em] text-accent">Technical</p>
+            <h3 class="mb-[0.6rem] font-display text-[1.05rem] font-semibold">Analitis &amp; Problem Solving</h3>
+            <p class="text-[0.82rem] leading-relaxed text-muted">Menganalisis informasi, memecahkan masalah, dan membuat keputusan berbasis data. Mengidentifikasi dan mengimplementasikan solusi dengan efektif.</p>
+          </article>
+          <article class="relative overflow-hidden rounded-2xl border border-line bg-canvas p-7 transition duration-300 before:absolute before:inset-x-0 before:top-0 before:h-0.5 before:bg-linear-to-r before:from-accent before:to-accent-2 before:opacity-0 before:transition-opacity before:duration-300 before:content-[''] hover:-translate-y-1 hover:border-accent/30 hover:before:opacity-100">
+            <p class="mb-[0.6rem] text-[0.7rem] uppercase tracking-[0.12em] text-accent">Technical</p>
+            <h3 class="mb-[0.6rem] font-display text-[1.05rem] font-semibold">Matematika &amp; Sains</h3>
+            <p class="text-[0.82rem] leading-relaxed text-muted">Aritmatika, algebra, geometri, statistik, serta dasar-dasar ilmu pengetahuan alam dan sosial.</p>
+          </article>
+          <article class="relative overflow-hidden rounded-2xl border border-line bg-canvas p-7 transition duration-300 before:absolute before:inset-x-0 before:top-0 before:h-0.5 before:bg-linear-to-r before:from-accent before:to-accent-2 before:opacity-0 before:transition-opacity before:duration-300 before:content-[''] hover:-translate-y-1 hover:border-accent/30 hover:before:opacity-100">
+            <p class="mb-[0.6rem] text-[0.7rem] uppercase tracking-[0.12em] text-accent">Soft Skill</p>
+            <h3 class="mb-[0.6rem] font-display text-[1.05rem] font-semibold">Kepemimpinan</h3>
+            <p class="text-[0.82rem] leading-relaxed text-muted">Menyampaikan ide dengan jelas, berani mengambil keputusan, dan bertanggung jawab atas konsekuensinya dalam tim maupun organisasi.</p>
+          </article>
+          <article class="relative overflow-hidden rounded-2xl border border-line bg-canvas p-7 transition duration-300 before:absolute before:inset-x-0 before:top-0 before:h-0.5 before:bg-linear-to-r before:from-accent before:to-accent-2 before:opacity-0 before:transition-opacity before:duration-300 before:content-[''] hover:-translate-y-1 hover:border-accent/30 hover:before:opacity-100">
+            <p class="mb-[0.6rem] text-[0.7rem] uppercase tracking-[0.12em] text-accent">Soft Skill</p>
+            <h3 class="mb-[0.6rem] font-display text-[1.05rem] font-semibold">Komunikasi &amp; Kolaborasi</h3>
+            <p class="text-[0.82rem] leading-relaxed text-muted">Mampu bekerja sama lintas tim, membangun hubungan yang baik, dan menyampaikan penjelasan kepada berbagai audiens secara efektif.</p>
+          </article>
+          <article class="relative overflow-hidden rounded-2xl border border-line bg-canvas p-7 transition duration-300 before:absolute before:inset-x-0 before:top-0 before:h-0.5 before:bg-linear-to-r before:from-accent before:to-accent-2 before:opacity-0 before:transition-opacity before:duration-300 before:content-[''] hover:-translate-y-1 hover:border-accent/30 hover:before:opacity-100">
+            <p class="mb-[0.6rem] text-[0.7rem] uppercase tracking-[0.12em] text-accent">Soft Skill</p>
+            <h3 class="mb-[0.6rem] font-display text-[1.05rem] font-semibold">Kreativitas &amp; Adaptasi</h3>
+            <p class="text-[0.82rem] leading-relaxed text-muted">Mengembangkan pendekatan kreatif dalam setiap situasi. Mampu beradaptasi dengan cepat terhadap perubahan dan lingkungan baru.</p>
+          </article>
           </div>
+        </div>
+      </section>
 
-          <div class="project-card">
-            <div class="project-preview">
-              <div class="project-preview-fallback">👤</div>
-              <div class="project-overlay"></div>
+      <!-- EXPERIENCE -->
+      <section id="experience" class="relative z-10">
+        <div class="mx-auto max-w-[1200px] px-6 py-16 desk:px-12 desk:py-24">
+          <p class="mb-3 flex items-center gap-3 text-[0.72rem] uppercase tracking-[0.15em] text-accent before:h-px before:w-6 before:bg-accent before:content-['']">Riwayat</p>
+          <h2 class="mb-12 font-display text-[clamp(2rem,4vw,3.2rem)] font-bold leading-[1.1] tracking-[-0.03em] desk:mb-16">Pengalaman</h2>
+          <div class="reveal grid gap-8 desk:grid-cols-2">
+            <div>
+              <h3 class="mb-6 border-b border-line pb-3 font-display text-[0.85rem] font-bold uppercase tracking-[0.08em] text-muted"><span aria-hidden="true">💼</span> Pengalaman Kerja</h3>
+          <article class="flex flex-col gap-1 border-b border-white/[0.04] py-5">
+            <h4 class="text-[0.95rem] font-medium">Videografer, Editor &amp; Pembuat Konten</h4>
+            <p class="text-[0.82rem] text-accent">Radio Andalas</p>
+            <p class="text-xs text-muted">Magang</p>
+            <p class="mt-1 text-[0.82rem] leading-normal text-ink/60">Bertugas sebagai videografer, melakukan editing video, serta mencari tema dan ide konten liputan yang menarik dan relevan.</p>
+          </article>
+          <article class="flex flex-col gap-1 border-b border-white/[0.04] py-5">
+            <h4 class="text-[0.95rem] font-medium">Videografer</h4>
+            <p class="text-[0.82rem] text-accent">Tegar TV</p>
+            <p class="text-xs text-muted">Magang</p>
+          </article>
+          <article class="flex flex-col gap-1 border-b border-white/[0.04] py-5">
+            <h4 class="text-[0.95rem] font-medium">Asisten Fotografer</h4>
+            <p class="text-[0.82rem] text-accent">Wahyu FO</p>
+            <p class="text-xs text-muted">Freelance</p>
+          </article>
+          <article class="flex flex-col gap-1 border-b border-white/[0.04] py-5">
+            <h4 class="text-[0.95rem] font-medium">Sales Marketing</h4>
+            <p class="text-[0.82rem] text-accent">YAMAHA</p>
+            <p class="text-xs text-muted">1 Bulan</p>
+          </article>
+          <article class="flex flex-col gap-1 border-b border-white/[0.04] py-5">
+            <h4 class="text-[0.95rem] font-medium">Konsultan Bisnis</h4>
+            <p class="text-[0.82rem] text-accent">PT. Best Profit</p>
+            <p class="text-xs text-muted">1 Bulan</p>
+          </article>
+          <article class="flex flex-col gap-1 border-b border-white/[0.04] py-5">
+            <h4 class="text-[0.95rem] font-medium">Telemarketing</h4>
+            <p class="text-[0.82rem] text-accent">PT. Net Apps</p>
+            <p class="text-xs text-muted">1 Bulan (Freelance)</p>
+          </article>
             </div>
-            <div class="project-body">
-              <div class="project-num">02 / Personal</div>
-              <h3 class="project-title">Personal Profile</h3>
-              <p class="project-desc">Halaman profil personal yang menampilkan identitas dan karya secara ringkas dan elegan.</p>
-              <a href="https://dzakialfarizi23.github.io/dzakialfarizi23/" target="_blank" class="project-link">
-                Lihat Proyek <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10" /></svg>
-              </a>
-            </div>
-          </div>
-
-          <div class="project-card">
-            <div class="project-preview">
-              <div class="project-preview-fallback">📊</div>
-              <div class="project-overlay"></div>
-            </div>
-            <div class="project-body">
-              <div class="project-num">03 / Admin</div>
-              <h3 class="project-title">Data Admin Panel</h3>
-              <p class="project-desc">Dashboard administrasi data dengan tampilan terstruktur untuk manajemen informasi yang efisien.</p>
-              <a href="https://dzakialfarizi23.github.io/data-admin-/" target="_blank" class="project-link">
-                Lihat Proyek <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10" /></svg>
-              </a>
-            </div>
-          </div>
-
-          <div class="project-card">
-            <div class="project-preview">
-              <div class="project-preview-fallback">🎮</div>
-              <div class="project-overlay"></div>
-            </div>
-            <div class="project-body">
-              <div class="project-num">04 / Game</div>
-              <h3 class="project-title">Lost Key Game</h3>
-              <p class="project-desc">Mini game berbasis web dengan alur cerita kunci yang hilang — pengalaman interaktif yang seru.</p>
-              <a href="https://dzakialfarizi23.github.io/game-LostKeyy/" target="_blank" class="project-link">
-                Lihat Proyek <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10" /></svg>
-              </a>
-            </div>
-          </div>
-
-          <div class="project-card">
-            <div class="project-preview">
-              <div class="project-preview-fallback">⛏️</div>
-              <div class="project-overlay"></div>
-            </div>
-            <div class="project-body">
-              <div class="project-num">05 / Tambang</div>
-              <h3 class="project-title">Tambang Project</h3>
-              <p class="project-desc">Website bertema pertambangan dengan informasi dan tampilan yang relevan dengan industri.</p>
-              <a href="https://dzakialfarizi23.github.io/tambang/" target="_blank" class="project-link">
-                Lihat Proyek <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10" /></svg>
-              </a>
-            </div>
-          </div>
-
-          <div class="project-card">
-            <div class="project-preview">
-              <div class="project-preview-fallback">🌟</div>
-              <div class="project-overlay"></div>
-            </div>
-            <div class="project-body">
-              <div class="project-num">06 / ASA</div>
-              <h3 class="project-title">ASA Web</h3>
-              <p class="project-desc">Platform web dengan konsep harapan dan aspirasi, dirancang dengan desain yang menginspirasi.</p>
-              <a href="https://dzakialfarizi23.github.io/asa/" target="_blank" class="project-link">
-                Lihat Proyek <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10" /></svg>
-              </a>
-            </div>
-          </div>
-
-          <div class="project-card">
-            <div class="project-preview">
-              <div class="project-preview-fallback">🍜</div>
-              <div class="project-overlay"></div>
-            </div>
-            <div class="project-body">
-              <div class="project-num">07 / Food</div>
-              <h3 class="project-title">Mie Ayam DeDe</h3>
-              <p class="project-desc">Website UMKM kuliner mie ayam dengan menu digital, profil usaha, dan informasi kontak.</p>
-              <a href="https://dzakialfarizi23.github.io/MieAyamDeDe/" target="_blank" class="project-link">
-                Lihat Proyek <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10" /></svg>
-              </a>
-            </div>
-          </div>
-
-          <div class="project-card">
-            <div class="project-preview">
-              <div class="project-preview-fallback">💡</div>
-              <div class="project-overlay"></div>
-            </div>
-            <div class="project-body">
-              <div class="project-num">08 / Demo</div>
-              <h3 class="project-title">Contoh Project</h3>
-              <p class="project-desc">Proyek demonstrasi dan latihan teknik web development dengan berbagai komponen UI.</p>
-              <a href="https://dzakialfarizi23.github.io/contoh/" target="_blank" class="project-link">
-                Lihat Proyek <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10" /></svg>
-              </a>
-            </div>
-          </div>
-
-          <div class="project-card">
-            <div class="project-preview">
-              <div class="project-preview-fallback">📚</div>
-              <div class="project-overlay"></div>
-            </div>
-            <div class="project-body">
-              <div class="project-num">09 / Edukasi</div>
-              <h3 class="project-title">Axiom8 Pembelajaran</h3>
-              <p class="project-desc">Platform e-learning Axiom8 untuk mendukung proses pembelajaran digital yang interaktif.</p>
-              <a href="https://dzakialfarizi23.github.io/axiom8-pembelajaran-/" target="_blank" class="project-link">
-                Lihat Proyek <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10" /></svg>
-              </a>
-            </div>
-          </div>
-
-          <div class="project-card">
-            <div class="project-preview">
-              <div class="project-preview-fallback">🔮</div>
-              <div class="project-overlay"></div>
-            </div>
-            <div class="project-body">
-              <div class="project-num">10 / Personal</div>
-              <h3 class="project-title">Dzaki Hub</h3>
-              <p class="project-desc">Hub personal Dzaki — koleksi karya, tautan, dan kreasi digital dalam satu halaman.</p>
-              <a href="https://dzakialfarizi23.github.io/dzaki/" target="_blank" class="project-link">
-                Lihat Proyek <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10" /></svg>
-              </a>
+            <div>
+              <h3 class="mb-6 border-b border-line pb-3 font-display text-[0.85rem] font-bold uppercase tracking-[0.08em] text-muted"><span aria-hidden="true">🏛️</span> Pengalaman Organisasi</h3>
+          <article class="flex flex-col gap-1 border-b border-white/[0.04] py-5">
+            <h4 class="text-[0.95rem] font-medium">Anggota — Divisi Humas (Eksternal &amp; Sponsorship)</h4>
+            <p class="text-[0.82rem] text-accent">Himpunan Mahasiswa Informatika</p>
+            <p class="text-xs text-muted">2024 — Sekarang</p>
+            <p class="mt-1 text-[0.82rem] leading-normal text-ink/60">Menjalin hubungan eksternal, mengelola sponsorship kegiatan, dan menjadi representasi himpunan di acara eksternal.</p>
+          </article>
+          <article class="flex flex-col gap-1 border-b border-white/[0.04] py-5">
+            <h4 class="text-[0.95rem] font-medium">Anggota</h4>
+            <p class="text-[0.82rem] text-accent">Anak Muda Pesisir Selatan (AMPS)</p>
+            <p class="text-xs text-muted">Desember 2024 — Sekarang</p>
+            <p class="mt-1 text-[0.82rem] leading-normal text-ink/60">Mendukung program organisasi, melaksanakan proyek, dan menghadiri rapat serta acara organisasi.</p>
+          </article>
+          <article class="flex flex-col gap-1 border-b border-white/[0.04] py-5">
+            <h4 class="text-[0.95rem] font-medium">Anggota</h4>
+            <p class="text-[0.82rem] text-accent">Ikatan Pemuda Pemudi Sulit Air (IPPSA)</p>
+            <p class="text-xs text-muted">Agustus 2019 — Sekarang</p>
+            <p class="mt-1 text-[0.82rem] leading-normal text-ink/60">Aktif berpartisipasi dalam kegiatan, menyampaikan ide, dan berkolaborasi untuk mencapai tujuan bersama.</p>
+          </article>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <hr class="section-divider" />
-
-    <!-- CONTACT -->
-    <section id="contact" class="contact-bg">
-      <div class="section-inner">
-        <div class="contact-inner reveal">
-          <div>
-            <div class="section-label">Mari Terhubung</div>
-            <h2 class="contact-tagline">Punya <span>ide proyek</span> atau ingin berkolaborasi?</h2>
-            <p class="contact-sub">Saya terbuka untuk peluang kerja sama, diskusi teknis, maupun sekadar ngobrol soal teknologi dan desain. Jangan ragu untuk menghubungi saya.</p>
-            <a href="mailto:dzakialfarizii3@gmail.com" class="btn btn-primary" style="text-decoration: none">Kirim Email →</a>
-          </div>
-          <div class="contact-links">
-            <a href="mailto:dzakialfarizii3@gmail.com" class="contact-link">
-              <div class="contact-link-icon">📧</div>
-              <div class="contact-link-info">
-                <label>Email</label>
-                <span>dzakialfarizii3@gmail.com</span>
-              </div>
-            </a>
-            <a href="tel:+628970110236" class="contact-link">
-              <div class="contact-link-icon">📱</div>
-              <div class="contact-link-info">
-                <label>WhatsApp / Telepon</label>
-                <span>+62 897-011-0236</span>
-              </div>
-            </a>
-            <a href="https://www.linkedin.com/in/muhamad-dzaki-al-farizi-1bb873303" target="_blank" class="contact-link">
-              <div class="contact-link-icon">💼</div>
-              <div class="contact-link-info">
-                <label>LinkedIn</label>
-                <span>muhamad-dzaki-al-farizi</span>
-              </div>
-            </a>
-            <a href="https://dzakialfarizi23.github.io/dzakialfarizi23/" target="_blank" class="contact-link">
-              <div class="contact-link-icon">💻</div>
-              <div class="contact-link-info">
-                <label>GitHub Pages</label>
-                <span>dzakialfarizi23.github.io</span>
-              </div>
-            </a>
+      <!-- PROJECTS -->
+      <section id="projects" class="relative z-10 border-t border-line">
+        <div class="mx-auto max-w-[1200px] px-6 py-16 desk:px-12 desk:py-24">
+          <p class="mb-3 flex items-center gap-3 text-[0.72rem] uppercase tracking-[0.15em] text-accent before:h-px before:w-6 before:bg-accent before:content-['']">Portofolio</p>
+          <h2 class="mb-12 font-display text-[clamp(2rem,4vw,3.2rem)] font-bold leading-[1.1] tracking-[-0.03em] desk:mb-16">Proyek Web</h2>
+          <div class="reveal-stagger grid gap-6 sm:grid-cols-2 desk:grid-cols-3">
+          <article class="group overflow-hidden rounded-2xl border border-line bg-surface transition duration-300 hover:-translate-y-1.5 hover:border-accent/40 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4),0_0_0_1px_rgba(110,231,247,0.1)]">
+            <div class="relative flex h-40 items-center justify-center overflow-hidden bg-surface-2">
+              <span class="text-[2.5rem]" aria-hidden="true">🏝️</span>
+              <div class="absolute inset-0 bg-linear-to-b from-transparent from-40% to-surface"></div>
+            </div>
+            <div class="px-6 pb-6 pt-5">
+              <p class="mb-[0.4rem] font-display text-[0.65rem] tracking-[0.15em] text-muted">01 / Wisata</p>
+              <h3 class="mb-[0.4rem] font-display text-base font-bold">Wisata Explorer</h3>
+              <p class="mb-4 text-[0.8rem] leading-normal text-muted">Website informasi destinasi wisata interaktif dengan tampilan yang menarik dan informatif.</p>
+              <a href="https://dzakialfarizi23.github.io/wisata/" target="_blank" rel="noopener noreferrer" class="group/link inline-flex items-center gap-[0.4rem] text-[0.78rem] font-medium tracking-[0.04em] text-accent transition-[gap] duration-200 hover:gap-[0.7rem]">
+                Lihat Proyek<span class="sr-only"> Wisata Explorer</span>
+                <svg class="size-3 transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7v10" /></svg>
+              </a>
+            </div>
+          </article>
+          <article class="group overflow-hidden rounded-2xl border border-line bg-surface transition duration-300 hover:-translate-y-1.5 hover:border-accent/40 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4),0_0_0_1px_rgba(110,231,247,0.1)]">
+            <div class="relative flex h-40 items-center justify-center overflow-hidden bg-surface-2">
+              <span class="text-[2.5rem]" aria-hidden="true">👤</span>
+              <div class="absolute inset-0 bg-linear-to-b from-transparent from-40% to-surface"></div>
+            </div>
+            <div class="px-6 pb-6 pt-5">
+              <p class="mb-[0.4rem] font-display text-[0.65rem] tracking-[0.15em] text-muted">02 / Personal</p>
+              <h3 class="mb-[0.4rem] font-display text-base font-bold">Personal Profile</h3>
+              <p class="mb-4 text-[0.8rem] leading-normal text-muted">Halaman profil personal yang menampilkan identitas dan karya secara ringkas dan elegan.</p>
+              <a href="https://dzakialfarizi23.github.io/dzakialfarizi23/" target="_blank" rel="noopener noreferrer" class="group/link inline-flex items-center gap-[0.4rem] text-[0.78rem] font-medium tracking-[0.04em] text-accent transition-[gap] duration-200 hover:gap-[0.7rem]">
+                Lihat Proyek<span class="sr-only"> Personal Profile</span>
+                <svg class="size-3 transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7v10" /></svg>
+              </a>
+            </div>
+          </article>
+          <article class="group overflow-hidden rounded-2xl border border-line bg-surface transition duration-300 hover:-translate-y-1.5 hover:border-accent/40 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4),0_0_0_1px_rgba(110,231,247,0.1)]">
+            <div class="relative flex h-40 items-center justify-center overflow-hidden bg-surface-2">
+              <span class="text-[2.5rem]" aria-hidden="true">📊</span>
+              <div class="absolute inset-0 bg-linear-to-b from-transparent from-40% to-surface"></div>
+            </div>
+            <div class="px-6 pb-6 pt-5">
+              <p class="mb-[0.4rem] font-display text-[0.65rem] tracking-[0.15em] text-muted">03 / Admin</p>
+              <h3 class="mb-[0.4rem] font-display text-base font-bold">Data Admin Panel</h3>
+              <p class="mb-4 text-[0.8rem] leading-normal text-muted">Dashboard administrasi data dengan tampilan terstruktur untuk manajemen informasi yang efisien.</p>
+              <a href="https://dzakialfarizi23.github.io/data-admin-/" target="_blank" rel="noopener noreferrer" class="group/link inline-flex items-center gap-[0.4rem] text-[0.78rem] font-medium tracking-[0.04em] text-accent transition-[gap] duration-200 hover:gap-[0.7rem]">
+                Lihat Proyek<span class="sr-only"> Data Admin Panel</span>
+                <svg class="size-3 transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7v10" /></svg>
+              </a>
+            </div>
+          </article>
+          <article class="group overflow-hidden rounded-2xl border border-line bg-surface transition duration-300 hover:-translate-y-1.5 hover:border-accent/40 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4),0_0_0_1px_rgba(110,231,247,0.1)]">
+            <div class="relative flex h-40 items-center justify-center overflow-hidden bg-surface-2">
+              <span class="text-[2.5rem]" aria-hidden="true">🎮</span>
+              <div class="absolute inset-0 bg-linear-to-b from-transparent from-40% to-surface"></div>
+            </div>
+            <div class="px-6 pb-6 pt-5">
+              <p class="mb-[0.4rem] font-display text-[0.65rem] tracking-[0.15em] text-muted">04 / Game</p>
+              <h3 class="mb-[0.4rem] font-display text-base font-bold">Lost Key Game</h3>
+              <p class="mb-4 text-[0.8rem] leading-normal text-muted">Mini game berbasis web dengan alur cerita kunci yang hilang — pengalaman interaktif yang seru.</p>
+              <a href="https://dzakialfarizi23.github.io/game-LostKeyy/" target="_blank" rel="noopener noreferrer" class="group/link inline-flex items-center gap-[0.4rem] text-[0.78rem] font-medium tracking-[0.04em] text-accent transition-[gap] duration-200 hover:gap-[0.7rem]">
+                Lihat Proyek<span class="sr-only"> Lost Key Game</span>
+                <svg class="size-3 transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7v10" /></svg>
+              </a>
+            </div>
+          </article>
+          <article class="group overflow-hidden rounded-2xl border border-line bg-surface transition duration-300 hover:-translate-y-1.5 hover:border-accent/40 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4),0_0_0_1px_rgba(110,231,247,0.1)]">
+            <div class="relative flex h-40 items-center justify-center overflow-hidden bg-surface-2">
+              <span class="text-[2.5rem]" aria-hidden="true">⛏️</span>
+              <div class="absolute inset-0 bg-linear-to-b from-transparent from-40% to-surface"></div>
+            </div>
+            <div class="px-6 pb-6 pt-5">
+              <p class="mb-[0.4rem] font-display text-[0.65rem] tracking-[0.15em] text-muted">05 / Tambang</p>
+              <h3 class="mb-[0.4rem] font-display text-base font-bold">Tambang Project</h3>
+              <p class="mb-4 text-[0.8rem] leading-normal text-muted">Website bertema pertambangan dengan informasi dan tampilan yang relevan dengan industri.</p>
+              <a href="https://dzakialfarizi23.github.io/tambang/" target="_blank" rel="noopener noreferrer" class="group/link inline-flex items-center gap-[0.4rem] text-[0.78rem] font-medium tracking-[0.04em] text-accent transition-[gap] duration-200 hover:gap-[0.7rem]">
+                Lihat Proyek<span class="sr-only"> Tambang Project</span>
+                <svg class="size-3 transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7v10" /></svg>
+              </a>
+            </div>
+          </article>
+          <article class="group overflow-hidden rounded-2xl border border-line bg-surface transition duration-300 hover:-translate-y-1.5 hover:border-accent/40 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4),0_0_0_1px_rgba(110,231,247,0.1)]">
+            <div class="relative flex h-40 items-center justify-center overflow-hidden bg-surface-2">
+              <span class="text-[2.5rem]" aria-hidden="true">🌟</span>
+              <div class="absolute inset-0 bg-linear-to-b from-transparent from-40% to-surface"></div>
+            </div>
+            <div class="px-6 pb-6 pt-5">
+              <p class="mb-[0.4rem] font-display text-[0.65rem] tracking-[0.15em] text-muted">06 / ASA</p>
+              <h3 class="mb-[0.4rem] font-display text-base font-bold">ASA Web</h3>
+              <p class="mb-4 text-[0.8rem] leading-normal text-muted">Platform web dengan konsep harapan dan aspirasi, dirancang dengan desain yang menginspirasi.</p>
+              <a href="https://dzakialfarizi23.github.io/asa/" target="_blank" rel="noopener noreferrer" class="group/link inline-flex items-center gap-[0.4rem] text-[0.78rem] font-medium tracking-[0.04em] text-accent transition-[gap] duration-200 hover:gap-[0.7rem]">
+                Lihat Proyek<span class="sr-only"> ASA Web</span>
+                <svg class="size-3 transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7v10" /></svg>
+              </a>
+            </div>
+          </article>
+          <article class="group overflow-hidden rounded-2xl border border-line bg-surface transition duration-300 hover:-translate-y-1.5 hover:border-accent/40 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4),0_0_0_1px_rgba(110,231,247,0.1)]">
+            <div class="relative flex h-40 items-center justify-center overflow-hidden bg-surface-2">
+              <span class="text-[2.5rem]" aria-hidden="true">🍜</span>
+              <div class="absolute inset-0 bg-linear-to-b from-transparent from-40% to-surface"></div>
+            </div>
+            <div class="px-6 pb-6 pt-5">
+              <p class="mb-[0.4rem] font-display text-[0.65rem] tracking-[0.15em] text-muted">07 / Food</p>
+              <h3 class="mb-[0.4rem] font-display text-base font-bold">Mie Ayam DeDe</h3>
+              <p class="mb-4 text-[0.8rem] leading-normal text-muted">Website UMKM kuliner mie ayam dengan menu digital, profil usaha, dan informasi kontak.</p>
+              <a href="https://dzakialfarizi23.github.io/MieAyamDeDe/" target="_blank" rel="noopener noreferrer" class="group/link inline-flex items-center gap-[0.4rem] text-[0.78rem] font-medium tracking-[0.04em] text-accent transition-[gap] duration-200 hover:gap-[0.7rem]">
+                Lihat Proyek<span class="sr-only"> Mie Ayam DeDe</span>
+                <svg class="size-3 transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7v10" /></svg>
+              </a>
+            </div>
+          </article>
+          <article class="group overflow-hidden rounded-2xl border border-line bg-surface transition duration-300 hover:-translate-y-1.5 hover:border-accent/40 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4),0_0_0_1px_rgba(110,231,247,0.1)]">
+            <div class="relative flex h-40 items-center justify-center overflow-hidden bg-surface-2">
+              <span class="text-[2.5rem]" aria-hidden="true">💡</span>
+              <div class="absolute inset-0 bg-linear-to-b from-transparent from-40% to-surface"></div>
+            </div>
+            <div class="px-6 pb-6 pt-5">
+              <p class="mb-[0.4rem] font-display text-[0.65rem] tracking-[0.15em] text-muted">08 / Demo</p>
+              <h3 class="mb-[0.4rem] font-display text-base font-bold">Contoh Project</h3>
+              <p class="mb-4 text-[0.8rem] leading-normal text-muted">Proyek demonstrasi dan latihan teknik web development dengan berbagai komponen UI.</p>
+              <a href="https://dzakialfarizi23.github.io/contoh/" target="_blank" rel="noopener noreferrer" class="group/link inline-flex items-center gap-[0.4rem] text-[0.78rem] font-medium tracking-[0.04em] text-accent transition-[gap] duration-200 hover:gap-[0.7rem]">
+                Lihat Proyek<span class="sr-only"> Contoh Project</span>
+                <svg class="size-3 transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7v10" /></svg>
+              </a>
+            </div>
+          </article>
+          <article class="group overflow-hidden rounded-2xl border border-line bg-surface transition duration-300 hover:-translate-y-1.5 hover:border-accent/40 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4),0_0_0_1px_rgba(110,231,247,0.1)]">
+            <div class="relative flex h-40 items-center justify-center overflow-hidden bg-surface-2">
+              <span class="text-[2.5rem]" aria-hidden="true">📚</span>
+              <div class="absolute inset-0 bg-linear-to-b from-transparent from-40% to-surface"></div>
+            </div>
+            <div class="px-6 pb-6 pt-5">
+              <p class="mb-[0.4rem] font-display text-[0.65rem] tracking-[0.15em] text-muted">09 / Edukasi</p>
+              <h3 class="mb-[0.4rem] font-display text-base font-bold">Axiom8 Pembelajaran</h3>
+              <p class="mb-4 text-[0.8rem] leading-normal text-muted">Platform e-learning Axiom8 untuk mendukung proses pembelajaran digital yang interaktif.</p>
+              <a href="https://dzakialfarizi23.github.io/axiom8-pembelajaran-/" target="_blank" rel="noopener noreferrer" class="group/link inline-flex items-center gap-[0.4rem] text-[0.78rem] font-medium tracking-[0.04em] text-accent transition-[gap] duration-200 hover:gap-[0.7rem]">
+                Lihat Proyek<span class="sr-only"> Axiom8 Pembelajaran</span>
+                <svg class="size-3 transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7v10" /></svg>
+              </a>
+            </div>
+          </article>
+          <article class="group overflow-hidden rounded-2xl border border-line bg-surface transition duration-300 hover:-translate-y-1.5 hover:border-accent/40 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4),0_0_0_1px_rgba(110,231,247,0.1)]">
+            <div class="relative flex h-40 items-center justify-center overflow-hidden bg-surface-2">
+              <span class="text-[2.5rem]" aria-hidden="true">🔮</span>
+              <div class="absolute inset-0 bg-linear-to-b from-transparent from-40% to-surface"></div>
+            </div>
+            <div class="px-6 pb-6 pt-5">
+              <p class="mb-[0.4rem] font-display text-[0.65rem] tracking-[0.15em] text-muted">10 / Personal</p>
+              <h3 class="mb-[0.4rem] font-display text-base font-bold">Dzaki Hub</h3>
+              <p class="mb-4 text-[0.8rem] leading-normal text-muted">Hub personal Dzaki — koleksi karya, tautan, dan kreasi digital dalam satu halaman.</p>
+              <a href="https://dzakialfarizi23.github.io/dzaki/" target="_blank" rel="noopener noreferrer" class="group/link inline-flex items-center gap-[0.4rem] text-[0.78rem] font-medium tracking-[0.04em] text-accent transition-[gap] duration-200 hover:gap-[0.7rem]">
+                Lihat Proyek<span class="sr-only"> Dzaki Hub</span>
+                <svg class="size-3 transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7v10" /></svg>
+              </a>
+            </div>
+          </article>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <footer>
-      <p>© 2025 Muhamad Dzaki Al Farizi · Dibuat dengan ❤️ dari Lampung, Indonesia</p>
+      <!-- CONTACT -->
+      <section id="contact" class="relative z-10 border-t border-line bg-surface">
+        <div class="mx-auto max-w-[1200px] px-6 py-16 desk:px-12 desk:py-24">
+          <div class="reveal grid items-center gap-8 desk:grid-cols-[1.2fr_1fr] desk:gap-20">
+            <div>
+              <p class="mb-3 flex items-center gap-3 text-[0.72rem] uppercase tracking-[0.15em] text-accent before:h-px before:w-6 before:bg-accent before:content-['']">Mari Terhubung</p>
+              <h2 class="mb-6 font-display text-[clamp(2rem,4vw,3rem)] font-bold leading-[1.15] tracking-[-0.03em]">Punya <span class="text-accent">ide proyek</span> atau ingin berkolaborasi?</h2>
+              <p class="mb-8 text-base leading-[1.7] text-muted">Saya terbuka untuk peluang kerja sama, diskusi teknis, maupun sekadar ngobrol soal teknologi dan desain. Jangan ragu untuk menghubungi saya.</p>
+              <a href="mailto:dzakialfarizii3@gmail.com" class="inline-flex items-center gap-2 rounded-md px-8 py-[0.8rem] text-[0.9rem] font-medium transition duration-200 hover:-translate-y-0.5 bg-accent text-canvas hover:bg-[#a5f3fc]">Kirim Email →</a>
+            </div>
+            <div class="flex flex-col gap-4">
+          <a href="mailto:dzakialfarizii3@gmail.com" class="flex items-center gap-4 rounded-xl border border-line bg-canvas px-5 py-4 text-ink transition duration-200 hover:translate-x-1 hover:border-accent">
+            <span class="flex size-9 shrink-0 items-center justify-center rounded-lg bg-surface-2 text-base" aria-hidden="true">📧</span>
+            <span>
+              <span class="mb-[0.1rem] block text-[0.68rem] uppercase tracking-widest text-muted">Email</span>
+              <span class="text-[0.88rem] font-medium">dzakialfarizii3@gmail.com</span>
+            </span>
+          </a>
+          <a href="tel:+628970110236" class="flex items-center gap-4 rounded-xl border border-line bg-canvas px-5 py-4 text-ink transition duration-200 hover:translate-x-1 hover:border-accent">
+            <span class="flex size-9 shrink-0 items-center justify-center rounded-lg bg-surface-2 text-base" aria-hidden="true">📱</span>
+            <span>
+              <span class="mb-[0.1rem] block text-[0.68rem] uppercase tracking-widest text-muted">WhatsApp / Telepon</span>
+              <span class="text-[0.88rem] font-medium">+62 897-011-0236</span>
+            </span>
+          </a>
+          <a href="https://www.linkedin.com/in/muhamad-dzaki-al-farizi-1bb873303" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 rounded-xl border border-line bg-canvas px-5 py-4 text-ink transition duration-200 hover:translate-x-1 hover:border-accent">
+            <span class="flex size-9 shrink-0 items-center justify-center rounded-lg bg-surface-2 text-base" aria-hidden="true">💼</span>
+            <span>
+              <span class="mb-[0.1rem] block text-[0.68rem] uppercase tracking-widest text-muted">LinkedIn</span>
+              <span class="text-[0.88rem] font-medium">muhamad-dzaki-al-farizi</span>
+            </span>
+          </a>
+          <a href="https://dzakialfarizi23.github.io/dzakialfarizi23/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 rounded-xl border border-line bg-canvas px-5 py-4 text-ink transition duration-200 hover:translate-x-1 hover:border-accent">
+            <span class="flex size-9 shrink-0 items-center justify-center rounded-lg bg-surface-2 text-base" aria-hidden="true">💻</span>
+            <span>
+              <span class="mb-[0.1rem] block text-[0.68rem] uppercase tracking-widest text-muted">GitHub Pages</span>
+              <span class="text-[0.88rem] font-medium">dzakialfarizi23.github.io</span>
+            </span>
+          </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="relative z-10 border-t border-line px-6 py-6 text-center text-[0.78rem] tracking-[0.03em] text-muted desk:px-12">
+      <p>© <span id="year">2026</span> Muhamad Dzaki Al Farizi · Dibuat dengan ❤️ dari Lampung, Indonesia</p>
     </footer>
 
-    <script>
-      // Custom cursor
-      const cursor = document.getElementById("cursor");
-      const ring = document.getElementById("cursorRing");
-      let mx = 0,
-        my = 0,
-        rx = 0,
-        ry = 0;
-
-      document.addEventListener("mousemove", (e) => {
-        mx = e.clientX;
-        my = e.clientY;
-        cursor.style.left = mx - 4 + "px";
-        cursor.style.top = my - 4 + "px";
-      });
-
-      function animateRing() {
-        rx += (mx - rx - 16) * 0.12;
-        ry += (my - ry - 16) * 0.12;
-        ring.style.left = rx + "px";
-        ring.style.top = ry + "px";
-        requestAnimationFrame(animateRing);
-      }
-      animateRing();
-
-      document.querySelectorAll("a, button").forEach((el) => {
-        el.addEventListener("mouseenter", () => {
-          cursor.style.transform = "scale(2.5)";
-          ring.style.transform = "scale(1.5)";
-        });
-        el.addEventListener("mouseleave", () => {
-          cursor.style.transform = "scale(1)";
-          ring.style.transform = "scale(1)";
-        });
-      });
-
-      // Scroll reveal
-      const reveals = document.querySelectorAll(".reveal");
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((e, i) => {
-            if (e.isIntersecting) {
-              setTimeout(() => e.target.classList.add("visible"), i * 80);
-              observer.unobserve(e.target);
-            }
-          });
-        },
-        { threshold: 0.1 },
-      );
-      reveals.forEach((el) => observer.observe(el));
-
-      // Stagger project cards
-      const cards = document.querySelectorAll(".project-card, .skill-card");
-      const cardObserver = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((e) => {
-            if (e.isIntersecting) {
-              const siblings = e.target.parentElement.querySelectorAll(".project-card, .skill-card");
-              siblings.forEach((s, i) => {
-                setTimeout(() => {
-                  s.style.opacity = 1;
-                  s.style.transform = "none";
-                }, i * 80);
-              });
-              cardObserver.unobserve(e.target);
-            }
-          });
-        },
-        { threshold: 0.05 },
-      );
-
-      cards.forEach((c) => {
-        c.style.opacity = 0;
-        c.style.transform = "translateY(24px)";
-        c.style.transition = "opacity 0.6s ease, transform 0.6s ease";
-        cardObserver.observe(c);
-      });
-    </script>
+    <script src="assets/js/main.js"></script>
   </body>
 </html>
